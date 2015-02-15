@@ -1,4 +1,4 @@
-var TASK_CLASS = 'com.xr.xuritask.task.XuriTask';
+var TASK_CLASS = 'com.songwie.task.task.XuriTask';
 
 function query(){
 	var baseurl = $("#home").val();
@@ -72,7 +72,7 @@ $(function(){
     $("#cancelid").bind("click",function(){
     	$.each($("#loginmodal input"),function(i,val){
     		$(val).val("");
-    	})
+    	});
     	$("#loginmodal").dialog("close");
 	});
 
@@ -96,30 +96,6 @@ $(function(){
     		    $('#addBtnId').trigger("click");
     		}
     	});
-//    	var tr = event.target.parentElement.parentElement.parentElement;
-//    	var tds = tr.children;
-//		var taskid = tds[1].innerHTML;
-//    	var taskname = tds[2].innerHTML  ;
-//		var taskclass = TASK_CLASS ;
-//		var taskurl = tds[3].innerHTML ;
-//		var taskpost = tds[4].innerHTML ;
-//		var taskparams = tds[5].innerHTML ;
-//		var cronexpression = tds[7].innerHTML;
-//
-//		var post = 1;
-//		if(taskpost=='GET'){
-//			post = 2;
-//		}
-//
-//		$("#taskname").val(taskname);
-//		$("#taskclass").val(taskclass);
-//		$("#taskurl").val(taskurl);
-//		$("#taskpost").val(post);
-//		$("#taskparams").val(taskparams);
-//	    $("#cronexpression").val(cronexpression);
-//	    $("#taskid").val(taskid);
-//
-//    	$('#addBtnId').trigger("click");
 	});
 
 

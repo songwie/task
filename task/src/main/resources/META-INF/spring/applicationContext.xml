@@ -18,15 +18,16 @@ http://www.springframework.org/schema/task  http://www.springframework.org/schem
 http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
 ">
     <import resource="classpath*:META-INF/spring/applicationContext-database.xml"/>
+    <import resource="classpath*:META-INF/spring/applicationContext-quartz.xml"/>
 
     <context:property-placeholder location="classpath*:META-INF/spring/*.properties"/>
     <context:spring-configured/>
     <aop:aspectj-autoproxy/>
 
-    <context:component-scan base-package="com.xr"/>
+    <context:component-scan base-package="com.songwie"/>
 
     <bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" id="jaxbMarshaller">
-        <property name="packagesToScan" value="com.xr.busiusr.model"> </property>
+        <property name="packagesToScan" value="com.songwie"> </property>
         <property name="marshallerProperties">
 	        <map>
 	           <entry key="jaxb.formatted.output"><value type="java.lang.Boolean">true</value></entry>

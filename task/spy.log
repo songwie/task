@@ -1,33 +1,33 @@
-1423971087882|-1||debug||com.p6spy.engine.common.P6SpyOptions reloading properties
-2015-02-15|-1||info||Using properties file: E:\个人\task\target\classes\spy.properties
+1423977759245|-1||debug||com.p6spy.engine.common.P6SpyOptions reloading properties
+2015-02-15|-1||info||Using properties file: E:\个人\task\task\target\classes\spy.properties
 2015-02-15|-1||info||No value in environment for: getStackTrace, using: false
 2015-02-15|-1||info||No value in environment for: getFilter, using: true
-2015-02-15|-1||info||No value in environment for: getAppend, using: true
 2015-02-15|-1||info||No value in environment for: getAppender, using: com.p6spy.engine.logging.appender.StdoutLogger
+2015-02-15|-1||info||No value in environment for: getAppend, using: true
 2015-02-15|-1||info||No value in environment for: getUsePrefix, using: false
-2015-02-15|-1||info||No value in environment for: getRealdriver, using: com.mysql.jdbc.Driver
-2015-02-15|-1||info||No value in environment for: getDateformat, using: yyyy-MM-dd
 2015-02-15|-1||info||No value in environment for: getAutoflush, using: true
-2015-02-15|-1||info||No value in environment for: getInclude, using: 
-2015-02-15|-1||info||No value in environment for: getLogfile, using: 
 2015-02-15|-1||info||No value in environment for: getExclude, using: 
 2015-02-15|-1||info||No value in environment for: getSpydriver, using: com.p6spy.engine.spy.P6SpyDriver
+2015-02-15|-1||info||No value in environment for: getInclude, using: 
+2015-02-15|-1||info||No value in environment for: getDateformat, using: yyyy-MM-dd
+2015-02-15|-1||info||No value in environment for: getLogfile, using: 
+2015-02-15|-1||info||No value in environment for: getRealdriver, using: com.mysql.jdbc.Driver
 2015-02-15|-1||info||No value in environment for: getDeregisterDrivers, using: true
-2015-02-15|-1||info||No value in environment for: getSQLExpression, using: null
-2015-02-15|-1||info||No value in environment for: getRealdriver2, using: null
-2015-02-15|-1||info||No value in environment for: getDateformatter, using: java.text.SimpleDateFormat@f67a0200
-2015-02-15|-1||info||No value in environment for: getStringMatcherEngine, using: com.p6spy.engine.common.SubstringMatcher@e80094e
-2015-02-15|-1||info||No value in environment for: getRealDataSourceClass, using: null
-2015-02-15|-1||info||No value in environment for: getExcludecategories, using: error,info,result,batch
 2015-02-15|-1||info||No value in environment for: getExecutionThreshold, using: 0
-2015-02-15|-1||info||No value in environment for: getRealdriver3, using: null
-2015-02-15|-1||info||No value in environment for: getJNDIContextCustom, using: null
-2015-02-15|-1||info||No value in environment for: getRealDataSource, using: null
-2015-02-15|-1||info||No value in environment for: getReloadProperties, using: false
-2015-02-15|-1||info||No value in environment for: getJNDIContextProviderURL, using: null
-2015-02-15|-1||info||No value in environment for: getReloadPropertiesInterval, using: 60
+2015-02-15|-1||info||No value in environment for: getExcludecategories, using: error,info,result,batch
 2015-02-15|-1||info||No value in environment for: getIncludecategories, using: statement, commit, rollback
-2015-02-15|-1||info||No value in environment for: getJNDIContextFactory, using: null
+2015-02-15|-1||info||No value in environment for: getRealdriver2, using: null
+2015-02-15|-1||info||No value in environment for: getRealdriver3, using: null
+2015-02-15|-1||info||No value in environment for: getDateformatter, using: java.text.SimpleDateFormat@f67a0200
+2015-02-15|-1||info||No value in environment for: getJNDIContextProviderURL, using: null
 2015-02-15|-1||info||No value in environment for: getRealDataSourceProperties, using: null
-2015-02-15|-1||info||No value in environment for: getStackTraceClass, using: 
+2015-02-15|-1||info||No value in environment for: getJNDIContextCustom, using: null
+2015-02-15|-1||info||No value in environment for: getJNDIContextFactory, using: null
+2015-02-15|-1||info||No value in environment for: getStringMatcherEngine, using: com.p6spy.engine.common.SubstringMatcher@5014ec00
+2015-02-15|-1||info||No value in environment for: getReloadProperties, using: false
+2015-02-15|-1||info||No value in environment for: getSQLExpression, using: null
 2015-02-15|-1||info||No value in environment for: getStringmatcher, using: com.p6spy.engine.common.SubstringMatcher
+2015-02-15|-1||info||No value in environment for: getRealDataSource, using: null
+2015-02-15|-1||info||No value in environment for: getStackTraceClass, using: 
+2015-02-15|-1||info||No value in environment for: getReloadPropertiesInterval, using: 60
+2015-02-15|-1||info||No value in environment for: getRealDataSourceClass, using: null
