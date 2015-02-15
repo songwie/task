@@ -1,4 +1,4 @@
-var TASK_CLASS = 'com.songwie.task.task.XuriTask';
+var TASK_CLASS = 'com.songwie.task.task.MyTask';
 
 function query(){
 	var baseurl = $("#home").val();
