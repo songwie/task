@@ -35,13 +35,13 @@
 	<br />
 </p>
 <p>
-	<img src="/attached/image/20150215/20150215114720_395.png" alt="" /> 
+	<img src="http://songwie.com/attached/image/20150215/20150215114720_395.png" alt="" /> 
 </p>
 <p>
 	<br />
 </p>
 <p>
-	<img src="/attached/image/20150215/20150215114739_785.png" alt="" /> 
+	<img src="http://songwie.com/attached/image/20150215/20150215114739_785.png" alt="" /> 
 </p>
 <p>
 	<br />
