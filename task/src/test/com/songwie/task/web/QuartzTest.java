@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.songwie.task.base.quartz.ScheduleJob;
 import com.songwie.task.base.quartz.TaskCronUtil;
-import com.songwie.task.task.XuriTask;
+import com.songwie.task.task.MyTask;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,7 +38,7 @@ public class QuartzTest {
 		job.setCronExpression("0/10 * * * * ?");
 		job.setJobId("myjobtest");
 		job.setJobName("测试");
-		job.setTaskClass(XuriTask.class);
+		job.setTaskClass(MyTask.class);
 
 		taskCronUtil.saveTask(job);
 
