@@ -1,0 +1,28 @@
+#logo img {
+  width: 150px;
+  height: auto;
+  padding-left: 3px;
+  margin-top: -3px;
+}
+#content {
+  overflow: hidden;
+  z-index: 0;
+}
+.amendPwd {
+  margin-top: 50px;
+  margin-left: 150px;
+}
+.amendPwd .smart-form fieldset {
+  background: none;
+}
+.amendPwd .smart-form footer {
+  border: none;
+  background: none;
+}
+.amendPwd .smart-form footer .btn {
+  float: left;
+  margin-left: 100px;
+}
+.basicInformation hr {
+  border-top: 1px solid #BDBDBD;
+}

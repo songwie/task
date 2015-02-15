@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+  <definition name="uncaughtException" extends="public">
+      <put-attribute name="body" value="/WEB-INF/views/uncaughtException.jsp" />
+  </definition>
+  <definition name="resourceNotFound" extends="nologin">
+      <put-attribute name="body" value="/WEB-INF/views/resourceNotFound.jsp" />
+  </definition>
+
+  <!-- 功能 -->
+  <!-- 登录相关 -->
+  <definition name="newlogin" template="/login/newLogin.jsp"></definition>
+  <!-- <definition name="loginindex" extends="public">
+      <put-attribute name="body" value="/login/loginindex.jsp" />
+  </definition> -->
+  <!-- 任务管理 -->
+  <definition name="taskmgr" extends="public">
+      <put-attribute name="body" value="/taskmanager/taskmanager.jsp" />
+  </definition>
+  <definition name="taskexecs" extends="public">
+      <put-attribute name="body" value="/taskmanager/taskexecquery.jsp" />
+  </definition>
+  <definition name="taskhis" extends="public">
+      <put-attribute name="body" value="/taskmanager/taskhisquery.jsp" />
+  </definition>  
+</tiles-definitions>

@@ -1,0 +1,31 @@
+/*左侧菜单的展开和闭合*/
+/*.fa-expand-o:before {*/
+    /*content:url(../img/down.png);*/
+/*}*/
+
+/*.fa-collapse-o:before{*/
+    /*content: "[-]";*/
+/*}*/
+
+/*个人用户的头像和名字*/
+.login-info{
+    border:none;
+    box-shadow:none;
+    width: 30%;
+
+}
+.login-info>span{
+    border:none;
+}
+.transparent{
+    width: 10%;
+}
+
+body{
+    font-family: tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
+}
+
+
+.fa{
+	line-height:none;
+}

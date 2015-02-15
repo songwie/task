@@ -1,0 +1,32 @@
+.ui-dialog .ui-dialog-titlebar-close{
+	top:70%;
+}
+#taskform>p{
+	overflow:hidden;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+#taskform>p>label,#taskform>p>input,#taskform>p>select{
+	float:left;
+	height:32px;
+	line-height:32px;
+}
+#taskform>p>label{
+	text-align:right;
+	width:80px;
+}
+#taskform>p>input,#taskform>p>select{
+	background:#FFF;
+	border:1px solid #eee;
+	color:#595757;
+	line-height:normal;
+	padding-left:8px;
+	width:200px;
+	margin-left:6px;
+	margin-right:6px;
+}
+
+#taskform .footer{
+	margin-left:124px;
+	overflow:hidden;
+}

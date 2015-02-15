@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:aop="http://www.springframework.org/schema/aop" 
+xmlns:context="http://www.springframework.org/schema/context" 
+xmlns:jee="http://www.springframework.org/schema/jee" 
+xmlns:tx="http://www.springframework.org/schema/tx"
+xmlns:cache="http://www.springframework.org/schema/cache"
+xmlns:task="http://www.springframework.org/schema/task"  
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:p="http://www.springframework.org/schema/p" 
+xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd         
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd         
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd         
+http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd         
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+">
+   
+    <!-- task test  -->
+    <!--非集群模式--> 
+	<!-- <bean id="taskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    <property name="concurrent" value="true"/>
+		<property name="targetObject" ref="tasktest" />
+		<property name="targetMethod" value="task" />
+	</bean> -->
+	<!--非集群模式/集群模式，包含集群所需的所有表--> 
+	<!-- <bean id="taskJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	     <property name="durability" value="true"></property>
+	     <property name="description" value="测试任务"></property>
+	     <property name="jobClass" value="com.xr.xuritask.task.XuriTask"  />   
+         <property name="jobDataAsMap">
+		    <map>
+		      <entry key="timeout" value="0"/>
+		    </map>
+		  </property>
+	</bean> 
+	<bean id="tasktrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"> 
+		<property name="jobDetail" ref = "taskJob"/> 
+		秒 分 时 日 月 星期 年
+		<property name="cronExpression" value= "0 0/10 * * * ?" />
+	</bean> --> 
+	
+ 	<!--非集群模式-->   
+	<!-- <bean id="schedulersemple" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref local="tasktrigger"/>  
+			</list>
+		</property>
+		<property name="quartzProperties">
+			<props>				
+				<prop key="org.quartz.scheduler.instanceName">DefaultQuartzScheduler</prop>
+				<prop key="org.quartz.scheduler.instanceId">AUTO</prop>
+				<prop key="org.quartz.scheduler.rmi.export">false</prop>
+				<prop key="org.quartz.scheduler.rmi.proxy">false</prop>
+				<prop key="org.quartz.scheduler.wrapJobExecutionInUserTransaction">false</prop>
+				
+				<prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+				<prop key="org.quartz.threadPool.threadCount">10</prop>
+				<prop key="org.quartz.threadPool.threadPriority">5</prop>
+				<prop key="org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread">true</prop>
+					
+  											
+			</props>
+		</property>		
+	</bean>   -->
+     
+    <!--集群模式，包含集群所需的所有表-->   
+    <bean id="schedulerCluster" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				 <!-- <ref bean="tasktrigger"/> -->   	
+			</list>
+		</property>
+		<property name="quartzProperties">
+			<props>				
+				<prop key="org.quartz.scheduler.instanceName">DefaultQuartzScheduler</prop>
+				<prop key="org.quartz.scheduler.instanceId">AUTO</prop>
+				<prop key="org.quartz.scheduler.rmi.export">false</prop>
+				<prop key="org.quartz.scheduler.rmi.proxy">false</prop>
+				<prop key="org.quartz.scheduler.wrapJobExecutionInUserTransaction">false</prop>
+				
+				<prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+				<prop key="org.quartz.threadPool.threadCount">10</prop>
+				<prop key="org.quartz.threadPool.threadPriority">5</prop>
+				<prop key="org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread">true</prop>
+					
+				<prop key="org.quartz.jobStore.class">org.quartz.impl.jdbcjobstore.JobStoreTX</prop>
+				<prop key="org.quartz.jobStore.driverDelegateClass">org.quartz.impl.jdbcjobstore.StdJDBCDelegate</prop>
+				<prop key="org.quartz.jobStore.misfireThreshold">60000</prop>
+				<prop key="org.quartz.jobStore.useProperties">false</prop>
+				<prop key="org.quartz.jobStore.tablePrefix">QRTZ_</prop>
+				<prop key="org.quartz.jobStore.dataSource">dataSource</prop>
+									
+				<prop key="org.quartz.jobStore.isClustered">false</prop>
+				<prop key="org.quartz.jobStore.clusterCheckinInterval">30000</prop>		
+											
+											
+			</props>
+		</property>	 
+		<property name="dataSource"> <ref bean="dataSource" /> </property>  
+		<property name="transactionManager" ref="transactionManager" />  
+		<property name="overwriteExistingJobs" value="true"/>
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />           
+
+
+ 	</bean>
+       
+
+</beans>
+
