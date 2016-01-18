@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="${home}resources/css/login.css">
     <title>Web定时任务管理系统</title>
 	<script type="text/javascript" src="${home}resources/js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="${home}login/login.js"></script>
+    <script type="text/javascript" src="${home}resources/login.js"></script>
 
 </head>
 <body>

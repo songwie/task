@@ -1,9 +1,7 @@
 package com.songwie.task.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,22 +9,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.songwie.task.base.quartz.ScheduleJob;
 
 
-@Configurable
 @Entity
 @Table(name = "TTASK_JOB")
 public class ScheduleJobBean implements Serializable {
-
+	@PersistenceContext
+    transient EntityManager entityManager;
+	
 	/** 任务id */
 	/**
 	 *
@@ -72,88 +68,7 @@ public class ScheduleJobBean implements Serializable {
 	/** 执行计划*/
 	@Column(name = "V_CRON_EXPRE" )
 	private String cronExpression;
-
-
-	/**
-	 *
-	 */
-	@javax.persistence.PersistenceContext
-	transient EntityManager entityManager;
-
-	public static final EntityManager entityManager() {
-		EntityManager em = new ScheduleJobBean().entityManager;
-		if (em == null)
-			throw new IllegalStateException(
-					"Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
-		return em;
-	}
-
-	@Transactional
-	public void persist() {
-		if (this.entityManager == null)
-			this.entityManager = entityManager();
-		this.entityManager.persist(this);
-		this.entityManager.flush();
-	}
-
-	public static ScheduleJobBean find(Integer id) {
-		if (id == null)
-			return null;
-		return entityManager().find(ScheduleJobBean.class, id);
-	}
-
-	@Transactional
-	public ScheduleJobBean merge() {
-		if (this.entityManager == null)
-			this.entityManager = entityManager();
-		ScheduleJobBean merged = this.entityManager.merge(this);
-		this.entityManager.flush();
-		return merged;
-	}
-
-	@Transactional
-	public void remove() {
-		if (this.entityManager == null)
-			this.entityManager = entityManager();
-		if (this.entityManager.contains(this)) {
-			this.entityManager.remove(this);
-		} else {
-			ScheduleJobBean attached = ScheduleJobBean.find(this.Id);
-			this.entityManager.remove(attached);
-		}
-	}
-
-	@Transactional
-	public void flush() {
-		if (this.entityManager == null)
-			this.entityManager = entityManager();
-		this.entityManager.flush();
-	}
-
-	@Transactional
-	public void clear() {
-		if (this.entityManager == null)
-			this.entityManager = entityManager();
-		this.entityManager.clear();
-	}
-
-
-	@SuppressWarnings("unchecked")
-	public static List<ScheduleJobBean> findJobsByList(List<ScheduleJob> jobs ) {
-		List<Integer> ids = new ArrayList<Integer>();
-		List<ScheduleJobBean> dataBeans = new ArrayList<ScheduleJobBean>();
-		for (ScheduleJob job : jobs) {
-			ids.add(Integer.valueOf(job.getJobId()));
-		}
-		if(ids.isEmpty()){
-			return dataBeans;
-		}
-		return entityManager().createQuery("from ScheduleJobBean where Id in (:ids ) ").setParameter("ids", ids).getResultList();
-	}
-
-
-
-
+ 
 
 	@Override
 	public int hashCode() {

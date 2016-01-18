@@ -5,12 +5,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.songwie.task.base.TaskException;
 import com.songwie.task.base.constant.TaskConstant;
+import com.songwie.task.dao.AllDaoImpl;
 import com.songwie.task.model.OperUser;
 import com.songwie.task.service.ILoginService;
 
@@ -19,6 +21,8 @@ import com.songwie.task.service.ILoginService;
 @Scope("prototype")
 @Transactional
 public class LoginService implements ILoginService{
+	@Autowired
+	private AllDaoImpl dao;
 
 	//登录
 	//默认商户或机构号为登录用户名
@@ -27,9 +31,9 @@ public class LoginService implements ILoginService{
 
 		OperUser operUser = null;
 
-		operUser = OperUser.getOperUserByUserNameAndPassoword(username, pwd);
+		operUser = dao.getOperUserByUserNameAndPassoword(username, pwd);
 		if(operUser==null){
-			operUser = OperUser.getOperUserByTelphone(String.valueOf(username));
+			operUser = dao.getOperUserByTelphone(String.valueOf(username));
 			if(operUser==null){
 				throw new TaskException("登录用户或手机不存在！");
 			}

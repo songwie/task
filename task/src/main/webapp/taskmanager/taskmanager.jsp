@@ -179,7 +179,7 @@
 
 <script src="${home}resources/js/app.js"></script>
 
-<script src="${home}taskmanager/taskmanager.js"></script>
+<script src="${home}resources/taskmanager.js"></script>
 
 <script>
 $(function(){

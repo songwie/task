@@ -1,6 +1,13 @@
-!.gitignore
 target/*
-.settings/*
+target/test-classes/*
+target/m2e-wtp/*
 .classpath
+.settings/*
 .project
-/target/
+/target
+
+*.iml
+.idea/*
+.spy.log
+/disconf/*
+/.apt_generated/

@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.songwie.task.base.ResultUtil;
 import com.songwie.task.base.quartz.ScheduleJob;
 import com.songwie.task.base.quartz.TaskCronUtil;
+import com.songwie.task.dao.AllDaoImpl;
+import com.songwie.task.dao.ScheduleJobDao;
 import com.songwie.task.model.JobResultBean;
 import com.songwie.task.model.ScheduleJobBean;
 import com.songwie.task.service.ITaskManagerService;
@@ -29,12 +31,16 @@ public class TaskManagerService implements ITaskManagerService{
 
 	@Autowired(required=false)
 	private TaskCronUtil taskCronUtil;
+	@Autowired
+	private AllDaoImpl dao;
+	@Autowired
+	private ScheduleJobDao scheduleJobDao;
 
 	@Override
 	public List<Map<String, Object>> getTasks(String operId ) {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		List<ScheduleJob> jobs = taskCronUtil.getTasks(null);
-		List<ScheduleJobBean> jobBeans = ScheduleJobBean.findJobsByList(jobs);
+		List<ScheduleJobBean> jobBeans = dao.findJobsByList(jobs);
 
 		if(jobs!=null){
 			for (ScheduleJob job : jobs) {
@@ -72,12 +78,12 @@ public class TaskManagerService implements ITaskManagerService{
 
 
 	public List<JobResultBean> getTaskHisByTaskId(String taskId){
-		List<JobResultBean> list = JobResultBean.getJobResultBeansById(taskId, 20);
+		List<JobResultBean> list = dao.getJobResultBeansById(taskId, 20);
 		return list;
 	}
 
 	public List<JobResultBean> getAllTopNTaskHis(){
-		List<JobResultBean> list = JobResultBean.getTopnJobResultBeans(50);
+		List<JobResultBean> list = dao.getTopnJobResultBeans(50);
 		return list;
 	}
 
@@ -85,7 +91,7 @@ public class TaskManagerService implements ITaskManagerService{
 	public List<Map<String, Object>> getTaskExecs(String operId ) {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		List<ScheduleJob> jobs = taskCronUtil.getTaskExecs(null);
-		List<ScheduleJobBean> jobBeans = ScheduleJobBean.findJobsByList(jobs);
+		List<ScheduleJobBean> jobBeans = dao.findJobsByList(jobs);
 
 		if(jobs!=null){
 			for (ScheduleJob job : jobs) {
@@ -134,7 +140,8 @@ public class TaskManagerService implements ITaskManagerService{
 		jobBean.setParams(job.getParams());
 		jobBean.setPostType(job.getPostType());
 		jobBean.setTaskUrl(job.getTaskUrl());
-		jobBean.persist();
+		
+		scheduleJobDao.save(jobBean);
 
 		job.setJobId(String.valueOf(jobBean.getId()));
 		taskCronUtil.saveTask(job);
@@ -142,14 +149,15 @@ public class TaskManagerService implements ITaskManagerService{
 
 	@Override
 	public void updateTask(String operId, String taskId,ScheduleJob job ) {
-		ScheduleJobBean jobBean = ScheduleJobBean.find(Integer.valueOf(taskId));
+		ScheduleJobBean jobBean = dao.find(Integer.valueOf(taskId));
 		jobBean.setJobName(job.getJobName());
 		jobBean.setDesc(job.getDesc());
 		jobBean.setOperUser(operId);
 		jobBean.setParams(job.getParams());
 		jobBean.setPostType(job.getPostType());
 		jobBean.setTaskUrl(job.getTaskUrl());
-		jobBean.merge();
+		
+		scheduleJobDao.save(jobBean);
 
 		job.setJobId(String.valueOf(jobBean.getId()));
 		taskCronUtil.saveTask(job);
@@ -184,7 +192,7 @@ public class TaskManagerService implements ITaskManagerService{
 
 	@Override
 	public ScheduleJobBean getTaskById(String taskId) {
-		ScheduleJobBean job = ScheduleJobBean.find(Integer.valueOf(taskId));
+		ScheduleJobBean job = dao.find(Integer.valueOf(taskId));
 		List<ScheduleJob> qurzJobs = taskCronUtil.getTaskByJobName(taskId);
 		ScheduleJob qurzJob = qurzJobs.get(0);
 		if(qurzJob!=null){

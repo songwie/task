@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -17,6 +18,7 @@ import com.songwie.task.base.constant.TaskConstant;
  *
  */
 @Aspect
+@Component
 public class CheckLoginAspect {
 	 @Before(value="@annotation(CheckLoginAnnotation)")
 	 public void checkPermission(JoinPoint jp,CheckLoginAnnotation CheckLoginAnnotation) throws Exception {

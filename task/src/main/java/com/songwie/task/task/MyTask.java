@@ -11,23 +11,33 @@ import org.quartz.JobExecutionException;
 import org.quartz.Trigger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.quartz.QuartzJobBean;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.google.common.base.Strings;
 import com.songwie.task.base.constant.TaskConstant;
 import com.songwie.task.base.log.ErrorLog;
 import com.songwie.task.base.util.HttpPostUtil;
+import com.songwie.task.dao.AllDaoImpl;
+import com.songwie.task.dao.JobResultDao;
 import com.songwie.task.model.JobResultBean;
 import com.songwie.task.model.ScheduleJobBean;
 
-@Component
+@Service
 public class MyTask extends QuartzJobBean implements Serializable{
 
 	private static final long serialVersionUID = 7026615035981953235L;
 
 	private static Logger log = LoggerFactory.getLogger(MyTask.class);
 	private static Logger error = LoggerFactory.getLogger(ErrorLog.class);
+	
+	private static ApplicationContext applicationContext;
+
+	private AllDaoImpl dao;
+	private JobResultDao jobResultDao;
+	
+	private static final String APPLICATION_CONTEXT_KEY = "applicationContext";
 
 
 	protected void task(JobExecutionContext context){
@@ -37,7 +47,7 @@ public class MyTask extends QuartzJobBean implements Serializable{
 		try {
 			JobDetail jobDetail = context.getJobDetail();
 			Trigger trigger = context.getTrigger();
-			jobdata = ScheduleJobBean.find(Integer.valueOf(jobDetail.getKey().getName()));
+			jobdata = dao.find(Integer.valueOf(jobDetail.getKey().getName()));
 			log.info("#######################"+ jobdata +" ####################### ");
 
 			String rs =  "";
@@ -71,7 +81,8 @@ public class MyTask extends QuartzJobBean implements Serializable{
 			jobResultBean.setJobName(jobdata.getDesc());
 			jobResultBean.setCreateTime(Calendar.getInstance());
 			jobResultBean.setJobId(jobDetail.getKey().getName());
-			jobResultBean.merge();
+			
+			jobResultDao.save(jobResultBean);
 
 		} catch (Exception e) {
 			error.error("#######################task error#######################");
@@ -88,7 +99,26 @@ public class MyTask extends QuartzJobBean implements Serializable{
 
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
+	    try {
+	    	if(applicationContext==null){
+	  	      applicationContext = getApplicationContext(context);
+	    	}
+	    	dao = applicationContext.getBean(AllDaoImpl.class);
+	    	jobResultDao = applicationContext.getBean(JobResultDao.class);
+
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    }
+		
 		this.task(context);
 	}
+	private ApplicationContext getApplicationContext(JobExecutionContext context) throws Exception {
+	      ApplicationContext appCtx = null;
+	      appCtx = (ApplicationContext) context.getScheduler().getContext().get(APPLICATION_CONTEXT_KEY);
+	      if (appCtx == null) {
+	        throw new JobExecutionException("No application context available in scheduler context for key \"" + APPLICATION_CONTEXT_KEY + "\"");
+	      }
+	      return appCtx;
+	  }
 
 }
