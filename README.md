@@ -46,3 +46,19 @@
 <p>
 	<br />
 </p>
+<p>
+启动方式：
+
+spring boot启动：
+
+java -jar C:\Users\sw\Desktop\task-web.war 
+
+
+或者运行根目录下的start.sh
+
+具体参数为：
+
+nohup java -Xms500m -Xmx500m -Xmn100m -XX:PermSize=64m -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+UseCMSCompactAtFullCollection -XX:CMSFullGCsBeforeCompaction=0 -XX:CMSInitiatingOccupancyFraction=70 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1986 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -jar task-web.war --spring.profiles.active=test --datasource.druid.url=jdbc:mysql://127.0.0.1:3306/task --datasource.druid.username=root --datasource.druid.password=root &  
+
+以上根据实际情况修改数据库地址、用户名、密码
+</p>
