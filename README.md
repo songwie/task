@@ -5,7 +5,7 @@
 	代码地址：<a href="https://github.com/songwie/task" target="_blank">https://github.com/songwie/task</a> 
 </p>
 <p>
-	下载地址：<a href="http://songwie.com/attached/task/task-web.war" target="_blank"></a>
+	下载地址：<a href="http://songwie.com/attached/task/task-web.war" target="_blank">http://songwie.com/attached/task/task-web.war</a>
 </p>
 <p>
 	任务管理系统是一个java 实现的，<strong>spring</strong> 集成<strong>quartz</strong>的动态任务管理系统， 通过该应用可以动态管理任务的调用，无需重启服务。
