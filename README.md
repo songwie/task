@@ -45,7 +45,9 @@ nohup java -Xms500m -Xmx500m -Xmn100m -XX:PermSize=64m -XX:+UseParNewGC -XX:+Use
 </p>
 
 <p>
+	
 后续改造路线：
+	
 	1. 完善日志监控，任务监控
 	
 	2. 集成mq（activemq等）把任务消息触发异步化，应用只需要集成mq消息的客户端即可接收定时任务，兼容非web应用，作为统一消息平台
